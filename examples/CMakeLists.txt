@@ -27,3 +27,14 @@ add_test(
 )
 # Test will fail since there is a cycle in the dependency graph
 set_tests_properties(cycle_check PROPERTIES PASS_REGULAR_EXPRESSION "The inter-target dependency graph contains the following strongly connected component")
+
+# delta_tests
+add_test(
+  NAME delta_tests
+  COMMAND ${CMAKE_CTEST_COMMAND}
+    --build-and-test
+      ${CMAKE_CURRENT_LIST_DIR}/delta_tests
+      ${CMAKE_CURRENT_LIST_DIR}/delta_tests/build
+    --build-generator "Unix Makefiles" -j 8
+    --test-command ${CMAKE_CTEST_COMMAND} ./delta_tests/build -VV -- -j 8
+)
