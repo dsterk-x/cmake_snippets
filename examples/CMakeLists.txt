@@ -21,9 +21,9 @@ add_test(
   NAME cycle_check
   COMMAND ${CMAKE_CTEST_COMMAND}
     --build-and-test
-      ${CMAKE_CURRENT_LIST_DIR}/cycle_check
-      ${CMAKE_CURRENT_LIST_DIR}/cycle_check/build
+      ${CMAKE_CURRENT_LIST_DIR}/cycle_depdendency_check
+      ${CMAKE_CURRENT_LIST_DIR}/cycle_depdendency_check/build
     --build-generator "Unix Makefiles" -j 8
 )
 # Test will fail since there is a cycle in the dependency graph
-set_tests_properties(cycle_check PROPERTIES WILL_FAIL TRUE)
+set_tests_properties(cycle_check PROPERTIES PASS_REGULAR_EXPRESSION "The inter-target dependency graph contains the following strongly connected component")
